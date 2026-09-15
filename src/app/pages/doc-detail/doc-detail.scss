@@ -1,0 +1,148 @@
+.doc {
+  padding-top: 28px;
+  max-width: 760px;
+}
+
+.back-link {
+  display: inline-block;
+  color: var(--text-faint);
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.back-link:hover {
+  color: var(--accent-2);
+}
+
+.doc__header {
+  margin-bottom: 32px;
+}
+
+.doc__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.doc__read-time {
+  color: var(--text-faint);
+  font-size: 0.8rem;
+}
+
+.doc__header h1 {
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.doc__summary {
+  color: var(--text-muted);
+  font-size: 1.08rem;
+  line-height: 1.55;
+  max-width: 60ch;
+}
+
+.doc__actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.doc__body {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.doc-section h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.doc-section p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-size: 1rem;
+  white-space: pre-line;
+}
+
+.doc-code {
+  margin-top: 14px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #c9d4f0;
+}
+
+.doc__pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.pager-link {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: border-color 0.15s ease;
+}
+
+.pager-link:hover {
+  border-color: var(--accent-2);
+}
+
+.pager-link span {
+  color: var(--text-faint);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.pager-link--next {
+  text-align: right;
+  align-items: flex-end;
+  grid-column: 2;
+}
+
+.doc-not-found {
+  padding-top: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.doc-not-found .card {
+  text-align: center;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+@media (max-width: 560px) {
+  .doc__pager {
+    grid-template-columns: 1fr;
+  }
+
+  .pager-link--next {
+    grid-column: 1;
+    text-align: left;
+    align-items: flex-start;
+  }
+}

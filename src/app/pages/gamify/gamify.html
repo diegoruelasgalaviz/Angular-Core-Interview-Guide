@@ -1,0 +1,114 @@
+@switch (mode()) {
+  @case ('select') {
+    <section class="page gamify-select">
+      <header class="gamify-select__header">
+        <span class="section-eyebrow">Gamify</span>
+        <h1>Test your knowledge</h1>
+        <p>
+          Pick a topic and answer its quiz. Your best score per topic is saved in your browser, so you
+          can track improvement each time you come back.
+        </p>
+      </header>
+
+      <div class="topic-grid">
+        @for (topic of topics; track topic.slug) {
+          <button type="button" class="card topic-card" (click)="startQuiz(topic)">
+            <div class="topic-card__meta">
+              <span
+                class="badge"
+                [class.badge--beginner]="topic.difficulty === 'Beginner'"
+                [class.badge--intermediate]="topic.difficulty === 'Intermediate'"
+                [class.badge--advanced]="topic.difficulty === 'Advanced'"
+              >
+                {{ topic.difficulty }}
+              </span>
+              @if (bestScoreFor(topic.slug); as best) {
+                <span class="best-score">Best: {{ best }}%</span>
+              }
+            </div>
+            <h3>{{ topic.title }}</h3>
+            <p>{{ topic.quiz.length }} questions</p>
+            <span class="topic-card__cta">Start quiz &rarr;</span>
+          </button>
+        }
+      </div>
+    </section>
+  }
+
+  @case ('quiz') {
+    @if (activeTopic(); as topic) {
+      <section class="page quiz">
+        <div class="quiz__top">
+          <button type="button" class="back-link" (click)="backToSelection()">&larr; Choose another topic</button>
+          <span class="quiz__counter">Question {{ currentIndex() + 1 }} of {{ topic.quiz.length }}</span>
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-fill" [style.width.%]="progressPercent()"></div>
+        </div>
+
+        <h1 class="quiz__topic-title">{{ topic.title }}</h1>
+
+        @if (currentQuestion(); as q) {
+          <div class="card question-card">
+            <h2>{{ q.question }}</h2>
+            <div class="options">
+              @for (option of q.options; track $index) {
+                <button
+                  type="button"
+                  class="option"
+                  [class.option--selected]="selectedOption() === $index && !answered()"
+                  [class.option--correct]="answered() && $index === q.correctIndex"
+                  [class.option--incorrect]="answered() && selectedOption() === $index && $index !== q.correctIndex"
+                  [disabled]="answered()"
+                  (click)="selectOption($index)"
+                >
+                  <span class="option__letter">{{ ['A', 'B', 'C', 'D'][$index] }}</span>
+                  <span>{{ option }}</span>
+                </button>
+              }
+            </div>
+
+            @if (answered()) {
+              <div class="explanation" [class.explanation--correct]="selectedOption() === q.correctIndex">
+                <strong>{{ selectedOption() === q.correctIndex ? 'Correct.' : 'Not quite.' }}</strong>
+                {{ q.explanation }}
+              </div>
+              <button type="button" class="btn btn--primary" (click)="nextQuestion()">
+                {{ isLastQuestion() ? 'See results' : 'Next question' }}
+              </button>
+            }
+          </div>
+        }
+      </section>
+    }
+  }
+
+  @case ('result') {
+    @if (activeTopic(); as topic) {
+      <section class="page result">
+        <div class="card result-summary">
+          <span class="section-eyebrow">Quiz complete</span>
+          <h1>{{ score() }} / {{ topic.quiz.length }}</h1>
+          <p class="result-percent">{{ resultPercent() }}% correct</p>
+          <p class="result-message">{{ resultMessage() }}</p>
+          <div class="result-actions">
+            <button type="button" class="btn btn--primary" (click)="retry()">Retry this topic</button>
+            <button type="button" class="btn btn--ghost" (click)="backToSelection()">Choose another topic</button>
+            <a class="btn btn--ghost" [routerLink]="['/docs', topic.slug]">Review the document</a>
+          </div>
+        </div>
+
+        <div class="result-review">
+          <h2>Question review</h2>
+          @for (r of results(); track $index) {
+            <div class="card review-item" [class.review-item--incorrect]="!r.correct">
+              <span class="review-icon">{{ r.correct ? '✅' : '❌' }}</span>
+              <span>{{ r.question }}</span>
+            </div>
+          }
+        </div>
+      </section>
+    }
+  }
+}

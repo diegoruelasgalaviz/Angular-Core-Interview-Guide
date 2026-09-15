@@ -1,1 +1,191 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'sass:color';
+
+:root {
+  color-scheme: dark;
+
+  --bg: #0b0e14;
+  --bg-elevated: #12161f;
+  --bg-card: #161b26;
+  --bg-card-hover: #1c2230;
+  --border: #262d3d;
+  --border-strong: #343d52;
+
+  --text: #e7eaf2;
+  --text-muted: #9aa3b8;
+  --text-faint: #6b7488;
+
+  --accent: #ff3d68;
+  --accent-strong: #ff6188;
+  --accent-soft: rgba(255, 61, 104, 0.12);
+
+  --accent-2: #4f9dff;
+  --accent-2-soft: rgba(79, 157, 255, 0.12);
+
+  --success: #35d399;
+  --success-soft: rgba(53, 211, 153, 0.12);
+  --warning: #ffb454;
+  --warning-soft: rgba(255, 180, 84, 0.12);
+  --danger: #ff5c72;
+  --danger-soft: rgba(255, 92, 114, 0.12);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  background-image:
+    radial-gradient(circle at 15% -10%, rgba(255, 61, 104, 0.16), transparent 45%),
+    radial-gradient(circle at 85% 0%, rgba(79, 157, 255, 0.12), transparent 40%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+}
+
+.page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+}
+
+.badge--beginner {
+  color: var(--success);
+  background: var(--success-soft);
+  border-color: rgba(53, 211, 153, 0.25);
+}
+
+.badge--intermediate {
+  color: var(--warning);
+  background: var(--warning-soft);
+  border-color: rgba(255, 180, 84, 0.25);
+}
+
+.badge--advanced {
+  color: var(--danger);
+  background: var(--danger-soft);
+  border-color: rgba(255, 92, 114, 0.25);
+}
+
+.badge--category {
+  color: var(--accent-2);
+  background: var(--accent-2-soft);
+  border-color: rgba(79, 157, 255, 0.25);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(255, 61, 104, 0.25);
+}
+
+.btn--primary:hover {
+  filter: brightness(1.06);
+}
+
+.btn--ghost {
+  background: var(--bg-card);
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.btn--ghost:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-2);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+.section-eyebrow {
+  color: var(--accent-2);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 0 16px 56px;
+  }
+}
