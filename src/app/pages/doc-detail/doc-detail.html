@@ -1,0 +1,67 @@
+@if (topic(); as t) {
+  <article class="page doc">
+    <a class="back-link" routerLink="/docs">&larr; All documents</a>
+
+    <header class="doc__header">
+      <div class="doc__meta">
+        <span
+          class="badge"
+          [class.badge--beginner]="t.difficulty === 'Beginner'"
+          [class.badge--intermediate]="t.difficulty === 'Intermediate'"
+          [class.badge--advanced]="t.difficulty === 'Advanced'"
+        >
+          {{ t.difficulty }}
+        </span>
+        <span class="badge badge--category">{{ t.category }}</span>
+        <span class="doc__read-time">{{ t.readMinutes }} min read</span>
+      </div>
+      <h1>{{ t.title }}</h1>
+      <p class="doc__summary">{{ t.summary }}</p>
+      <div class="doc__actions">
+        <a class="btn btn--primary" routerLink="/gamify" [queryParams]="{ topic: t.slug }">
+          Practice this topic
+        </a>
+        <button type="button" class="btn btn--ghost" (click)="copyLink()">
+          {{ copied() ? 'Link copied!' : 'Copy link' }}
+        </button>
+      </div>
+    </header>
+
+    <div class="doc__body">
+      @for (section of t.sections; track section.heading) {
+        <section class="doc-section">
+          <h2>{{ section.heading }}</h2>
+          <p>{{ section.body }}</p>
+          @if (section.code) {
+            <pre class="doc-code"><code>{{ section.code }}</code></pre>
+          }
+        </section>
+      }
+    </div>
+
+    <nav class="doc__pager">
+      @if (adjacent().prev; as prev) {
+        <a class="card pager-link pager-link--prev" [routerLink]="['/docs', prev.slug]">
+          <span>&larr; Previous</span>
+          <strong>{{ prev.title }}</strong>
+        </a>
+      } @else {
+        <span></span>
+      }
+      @if (adjacent().next; as next) {
+        <a class="card pager-link pager-link--next" [routerLink]="['/docs', next.slug]">
+          <span>Next &rarr;</span>
+          <strong>{{ next.title }}</strong>
+        </a>
+      }
+    </nav>
+  </article>
+} @else {
+  <div class="page doc-not-found">
+    <div class="card">
+      <h2>Topic not found</h2>
+      <p>That document doesn't exist yet. Head back to the library to keep browsing.</p>
+      <a class="btn btn--primary" routerLink="/docs">Back to documents</a>
+    </div>
+  </div>
+}

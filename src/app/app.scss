@@ -1,0 +1,25 @@
+.app-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+
+.app-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  padding-bottom: 28px !important;
+  color: var(--text-faint);
+  font-size: 0.85rem;
+}
+
+.app-footer__inner a {
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
+.app-footer__inner a:hover {
+  text-decoration: underline;
+}

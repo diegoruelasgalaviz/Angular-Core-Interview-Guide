@@ -1,0 +1,144 @@
+.hero {
+  padding-top: 24px;
+}
+
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding-top: 40px;
+  padding-bottom: 24px;
+}
+
+.hero__title {
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+}
+
+.hero__title-accent {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero__subtitle {
+  max-width: 62ch;
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.hero__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.hero__stats {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  width: 100%;
+}
+
+.hero__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero__stat strong {
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.hero__stat span {
+  color: var(--text-faint);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.section-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-top: 6px;
+  margin-bottom: 22px;
+}
+
+.highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+.highlight {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.highlight__icon {
+  font-size: 1.6rem;
+}
+
+.highlight h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.highlight p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.levels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.level-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.level-card:hover {
+  border-color: var(--accent-2);
+  transform: translateY(-2px);
+}
+
+.level-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  background: linear-gradient(135deg, rgba(255, 61, 104, 0.08), rgba(79, 157, 255, 0.08));
+}
+
+.cta p {
+  color: var(--text-muted);
+  margin-top: 6px;
+  max-width: 52ch;
+}

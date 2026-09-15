@@ -1,0 +1,78 @@
+<section class="hero">
+  <div class="page hero__inner">
+    <span class="section-eyebrow">Free &middot; No backend &middot; Study at your own pace</span>
+    <h1 class="hero__title">
+      Master Angular for your
+      <span class="hero__title-accent">senior-level interview</span>
+    </h1>
+    <p class="hero__subtitle">
+      {{ topicCount }} deep-dive lectures on the exact topics that come up in senior Angular
+      interviews — change detection, signals, RxJS, NgRx, DI, performance, SSR, security and more.
+      Every word lives in this app. No API, no login, no tracking.
+    </p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" routerLink="/docs">Start learning</a>
+      <a class="btn btn--ghost" routerLink="/gamify">Test your knowledge</a>
+    </div>
+    <div class="hero__stats">
+      <div class="hero__stat">
+        <strong>{{ topicCount }}</strong>
+        <span>subjects</span>
+      </div>
+      <div class="hero__stat">
+        <strong>{{ categories.length }}</strong>
+        <span>categories</span>
+      </div>
+      <div class="hero__stat">
+        <strong>{{ quizCount }}</strong>
+        <span>quiz questions</span>
+      </div>
+      <div class="hero__stat">
+        <strong>0</strong>
+        <span>backend calls</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <span class="section-eyebrow">Why this exists</span>
+  <h2 class="section-title">Everything you need, nothing you don't</h2>
+  <div class="highlights">
+    @for (h of highlights; track h.title) {
+      <div class="card highlight">
+        <div class="highlight__icon">{{ h.icon }}</div>
+        <h3>{{ h.title }}</h3>
+        <p>{{ h.body }}</p>
+      </div>
+    }
+  </div>
+</section>
+
+<section class="page">
+  <span class="section-eyebrow">Study by difficulty</span>
+  <h2 class="section-title">Pick your level</h2>
+  <div class="levels">
+    @for (level of difficulties; track level) {
+      <a class="card level-card" [routerLink]="['/docs']" [queryParams]="{ difficulty: level }">
+        <span class="badge" [class.badge--beginner]="level === 'Beginner'"
+              [class.badge--intermediate]="level === 'Intermediate'"
+              [class.badge--advanced]="level === 'Advanced'">
+          {{ level }}
+        </span>
+        <p>Browse every {{ level | lowercase }}-level subject in the library.</p>
+      </a>
+    }
+  </div>
+</section>
+
+<section class="page">
+  <div class="card cta">
+    <div>
+      <span class="section-eyebrow">Ready when you are</span>
+      <h2 class="section-title">Jump straight into the Documents library</h2>
+      <p>Search by keyword, filter by category or difficulty, and read real lecture content — not flashcard fragments.</p>
+    </div>
+    <a class="btn btn--primary" routerLink="/docs">Browse the library</a>
+  </div>
+</section>

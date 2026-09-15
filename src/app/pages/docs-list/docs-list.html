@@ -1,0 +1,99 @@
+<section class="page docs">
+  <header class="docs__header">
+    <span class="section-eyebrow">Documents</span>
+    <h1>The lecture library</h1>
+    <p>
+      {{ filteredTopics().length }} of {{ totalCount }} subjects shown.
+      Search by keyword or filter by difficulty and category.
+    </p>
+  </header>
+
+  <div class="docs__controls">
+    <div class="search">
+      <span class="search__icon" aria-hidden="true">🔍</span>
+      <input
+        type="search"
+        class="search__input"
+        placeholder="Search topics — e.g. &quot;signals&quot;, &quot;RxJS&quot;, &quot;security&quot;"
+        [value]="search()"
+        (input)="updateSearch($any($event.target).value)"
+        aria-label="Search topics"
+      />
+      @if (search()) {
+        <button type="button" class="search__clear" (click)="updateSearch('')" aria-label="Clear search">✕</button>
+      }
+    </div>
+
+    <div class="filter-row">
+      <div class="filter-group">
+        <span class="filter-group__label">Difficulty</span>
+        <div class="filter-pills">
+          <button
+            type="button"
+            class="pill"
+            [class.pill--active]="selectedDifficulty() === 'All'"
+            (click)="setDifficulty('All')"
+          >
+            All
+          </button>
+          @for (level of difficulties; track level) {
+            <button
+              type="button"
+              class="pill"
+              [class.pill--active]="selectedDifficulty() === level"
+              (click)="setDifficulty(level)"
+            >
+              {{ level }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-group__label">Category</span>
+        <select class="select" [value]="selectedCategory()" (change)="setCategory($any($event.target).value)">
+          <option value="All">All categories</option>
+          @for (cat of categories; track cat) {
+            <option [value]="cat">{{ cat }}</option>
+          }
+        </select>
+      </div>
+
+      @if (search() || selectedDifficulty() !== 'All' || selectedCategory() !== 'All') {
+        <button type="button" class="btn btn--ghost btn--sm" (click)="clearFilters()">Clear filters</button>
+      }
+    </div>
+  </div>
+
+  @if (filteredTopics().length > 0) {
+    <div class="doc-grid">
+      @for (topic of filteredTopics(); track topic.slug) {
+        <a class="card doc-card" [routerLink]="['/docs', topic.slug]">
+          <div class="doc-card__meta">
+            <span
+              class="badge"
+              [class.badge--beginner]="topic.difficulty === 'Beginner'"
+              [class.badge--intermediate]="topic.difficulty === 'Intermediate'"
+              [class.badge--advanced]="topic.difficulty === 'Advanced'"
+            >
+              {{ topic.difficulty }}
+            </span>
+            <span class="badge badge--category">{{ topic.category }}</span>
+          </div>
+          <h3>{{ topic.title }}</h3>
+          <p>{{ topic.summary }}</p>
+          <div class="doc-card__footer">
+            <span>{{ topic.readMinutes }} min read</span>
+            <span>{{ topic.quiz.length }} quiz questions</span>
+          </div>
+        </a>
+      }
+    </div>
+  } @else {
+    <div class="card empty-state">
+      <h3>No topics match your filters</h3>
+      <p>Try a different keyword, or clear your filters to see the full library.</p>
+      <button type="button" class="btn btn--ghost" (click)="clearFilters()">Clear filters</button>
+    </div>
+  }
+</section>
